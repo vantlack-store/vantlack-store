@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <title>VANTLACK — Official Store</title>
+  <meta name="description" content="VANTLACK. Contemporary streetwear. Explora nuestra colección.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #111;
+      --white: #fff;
+      --gray: #777;
+      --light: #f4f4f2;
+      --border: #e7e7e7;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--black);
+      background: var(--white);
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .announcement {
+      background: var(--black);
+      color: white;
+      text-align: center;
+      padding: 11px;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    header {
+      height: 76px;
+      padding: 0 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
+
+    .logo img {
+      width: 155px;
+      height: 55px;
+      object-fit: contain;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    nav a:hover {
+      opacity: .55;
+    }
+
+    .cart-button {
+      background: none;
+      border: none;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      min-height: 570px;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-symbol {
+      position: absolute;
+      width: min(430px, 80vw);
+      height: min(430px, 80vw);
+      object-fit: contain;
+      opacity: .12;
+      filter: invert(1);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 9vw, 105px);
+      letter-spacing: 10px;
+      font-weight: 800;
+    }
+
+    .hero p {
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-top: 18px;
+      color: #ccc;
+    }
+
+    .hero a {
+      display: inline-block;
+      margin-top: 38px;
+      padding: 15px 35px;
+      background: white;
+      color: black;
+      font-size: 10px;
+      letter-spacing: 2px;
+      transition: .2s;
+    }
+
+    .hero a:hover {
+      background: #ccc;
+    }
+
+    .section {
+      padding: 85px 6%;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      letter-spacing: 3px;
+      font-weight: 600;
+    }
+
+    .section-heading p {
+      color: var(--gray);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .filter {
+      padding: 10px 15px;
+      background: white;
+      border: 1px solid var(--border);
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .filter.active,
+    .filter:hover {
+      background: black;
+      color: white;
+      border-color: black;
+    }
+
+    .search {
+      border: 1px solid var(--border);
+      padding: 11px 13px;
+      width: 210px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .product-card {
+      min-width: 0;
+    }
+
+    .product-image {
+      height: 350px;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .shirt {
+      width: 145px;
+      height: 190px;
+      position: relative;
+      clip-path: polygon(22% 0, 0 18%, 13% 39%, 23% 29%, 23% 100%, 77% 100%, 77% 29%, 87% 39%, 100% 18%, 78% 0, 64% 8%, 36% 8%);
+      box-shadow: 0 15px 30px #0002;
+      transition: transform .3s;
+    }
+
+    .product-card:hover .shirt {
+      transform: scale(1.05);
+    }
+
+    .shirt.black {
+      background: #171717;
+    }
+
+    .shirt.white {
+      background: #fff;
+      border: 1px solid #ddd;
+    }
+
+    .shirt.gray {
+      background: #999;
+    }
+
+    .shirt::after {
+      content: "V";
+      position: absolute;
+      top: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: bold;
+      color: #888;
+    }
+
+    .product-info {
+      padding: 16px 2px;
+    }
+
+    .product-info h3 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .product-info p {
+      color: var(--gray);
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    .product-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .price {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .add-button {
+      border: 1px solid black;
+      background: white;
+      padding: 10px 13px;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .add-button:hover {
+      background: black;
+      color: white;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 40px;
+      text-align: center;
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    .about {
+      background: #111;
+      color: white;
+      padding: 85px 10%;
+      text-align: center;
+    }
+
+    .about img {
+      width: 85px;
+      height: 85px;
+      object-fit: contain;
+      filter: invert(1);
+      margin-bottom: 25px;
+    }
+
+    .about h2 {
+      font-size: 28px;
+      letter-spacing: 5px;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      color: #aaa;
+      font-size: 12px;
+      line-height: 2;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    footer {
+      background: #080808;
+      color: white;
+      padding: 40px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    footer p {
+      font-size: 10px;
+      color: #aaa;
+      letter-spacing: 1px;
+    }
+
+    .footer-name {
+      font-size: 17px;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+
+    .cart-panel {
+      position: fixed;
+      inset: 0;
+      background: #0008;
+      z-index: 30;
+      display: none;
+      justify-content: flex-end;
+    }
+
+    .cart-panel.open {
+      display: flex;
+    }
+
+    .cart-content {
+      width: min(430px, 100%);
+      height: 100%;
+      background: white;
+      padding: 28px;
+      overflow-y: auto;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .cart-header h2 {
+      font-size: 17px;
+      letter-spacing: 2px;
+    }
+
+    .close-cart {
+      border: none;
+      background: none;
+      font-size: 25px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    .cart-item small {
+      display: block;
+      color: var(--gray);
+      margin-top: 7px;
+    }
+
+    .remove {
+      border: none;
+      background: none;
+      color: #888;
+      font-size: 11px;
+      margin-top: 8px;
+      text-decoration: underline;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 0;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .checkout {
+      width: 100%;
+      border: none;
+      background: black;
+      color: white;
+      padding: 17px;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .checkout:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .checkout-form {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .checkout-form.show {
+      display: block;
+    }
+
+    .checkout-form h3 {
+      font-size: 12px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .checkout-form input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    .checkout-form button {
+      margin-top: 8px;
+    }
+
+    @media (max-width: 750px) {
+      header {
+        padding: 0 5%;
+        height: 68px;
+      }
+
+      .logo img {
+        width: 115px;
+      }
+
+      nav {
+        gap: 13px;
+        font-size: 9px;
+      }
+
+      nav a:nth-child(2) {
+        display: none;
+      }
+
+      .hero {
+        min-height: 460px;
+      }
+
+      .hero h1 {
+        letter-spacing: 5px;
+      }
+
+      .section {
+        padding: 60px 5%;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 12px;
+      }
+
+      .product-image {
+        height: 245px;
+      }
+
+      .shirt {
+        transform: scale(.8);
+      }
+
+      .product-card:hover .shirt {
+        transform: scale(.85);
+      }
+
+      .section-heading h2 {
+        font-size: 21px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      nav {
+        gap: 8px;
+      }
+
+      .cart-button {
+        font-size: 10px;
+      }
+
+      .product-image {
+        height: 210px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="announcement">
+    VANTLACK — CONTEMPORARY STREETWEAR
+  </div>
+
+  <header>
+    <a class="logo" href="#">
+      <img src="logo-vantlack.jpeg" alt="VANTLACK">
+    </a>
+
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#coleccion">Colección</a>
+      <a href="#nosotros">Nosotros</a>
+    </nav>
+
+    <button class="cart-button" onclick="toggleCart(true)">
+      BAG (<span id="cart-count">0</span>)
+    </button>
+  </header>
+
+  <section class="hero">
+    <img class="hero-symbol" src="simbolo-vantlack.jpeg" alt="">
+    <div class="hero-content">
+      <h1>VANTLACK</h1>
+      <p>DEFINE YOUR OWN STANDARD.</p>
+      <a href="#coleccion">EXPLORE COLLECTION</a>
+    </div>
+  </section>
+
+  <section class="section" id="coleccion">
+    <div class="section-heading">
+      <div>
+        <h2>THE COLLECTION</h2>
+        <p>SELECTED PIECES. TIMELESS STYLE.</p>
+      </div>
+    </div>
+
+    <div class="tools">
+      <div class="filters">
+        <button class="filter active" onclick="filterProducts('all', this)">ALL</button>
+        <button class="filter" onclick="filterProducts('shirts', this)">SHIRTS</button>
+        <button class="filter" onclick="filterProducts('essentials', this)">ESSENTIALS</button>
+      </div>
+
+      <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="Search products..."
+        oninput="renderProducts()"
+      >
+    </div>
+
+    <div class="products" id="products"></div>
+  </section>
+
+  <section class="about" id="nosotros">
+    <img src="simbolo-vantlack.jpeg" alt="VANTLACK symbol">
+    <h2>VANTLACK</h2>
+    <p>
+      A different perspective on everyday essentials.
+      Minimal design, contemporary style and a standard
+      defined by individuality.
+    </p>
+  </section>
+
+  <footer>
+    <div class="footer-name">VANTLACK</div>
+    <p>© 2026 VANTLACK. ALL RIGHTS RESERVED.</p>
+    <p>GUATEMALA</p>
+  </footer>
+
+  <div class="cart-panel" id="cart-panel" onclick="outsideCart(event)">
+    <div class="cart-content">
+      <div class="cart-header">
+        <h2>YOUR BAG</h2>
+        <button class="close-cart" onclick="toggleCart(false)">×</button>
+      </div>
+
+      <div id="cart-items"></div>
+
+      <div class="cart-total">
+        <span>SUBTOTAL</span>
+        <span id="cart-total">Q0</span>
+      </div>
+
+      <button class="checkout" id="checkout-button" onclick="showCheckout()" disabled>
+        CONTINUE TO CHECKOUT
+      </button>
+
+      <form class="checkout-form" id="checkout-form" onsubmit="sendOrder(event)">
+        <h3>YOUR INFORMATION</h3>
+        <input id="customer-name" type="text" placeholder="Full name" required>
+        <input id="customer-phone" type="tel" placeholder="Phone number" required>
+        <input id="customer-address" type="text" placeholder="Delivery address" required>
+        <button class="checkout" type="submit">PLACE ORDER VIA WHATSAPP</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // PRODUCTOS DE EJEMPLO: sustituye estos datos por tus productos reales.
+    const productsData = [
+      {
+        id: 1,
+        name: "ESSENTIALS TEE",
+        description: "Black / Minimal fit",
+        price: 250,
+        category: "essentials",
+        color: "black"
+      },
+      {
+        id: 2,
+        name: "ESSENTIALS TEE",
+        description: "White / Minimal fit",
+        price: 250,
+        category: "essentials",
+        color: "white"
+      },
+      {
+        id: 3,
+        name: "CLASSIC TEE",
+        description: "Grey / Everyday fit",
+        price: 250,
+        category: "shirts",
+        color: "gray"
+      }
+    ];
+
+    let cart = [];
+    let currentFilter = "all";
+
+    function renderProducts() {
+      const container = document.getElementById("products");
+      const search = document.getElementById("search").value.toLowerCase();
+
+      const filtered = productsData.filter(product => {
+        const matchesFilter =
+          currentFilter === "all" ||
+          product.category === currentFilter ||
+          (currentFilter === "shirts" && product.category === "essentials");
+
+        const matchesSearch =
+          product.name.toLowerCase().includes(search) ||
+          product.description.toLowerCase().includes(search);
+
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="empty">No products found.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(product => `
+        <article class="product-card">
+          <div class="product-image">
+            <div class="shirt ${product.color}"></div>
+          </div>
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <div class="product-bottom">
+              <span class="price">Q${product.price}</span>
+              <button class="add-button" onclick="addToCart(${product.id})">
+                ADD TO BAG +
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function filterProducts(category, button) {
+      currentFilter = category;
+
+      document.querySelectorAll(".filter").forEach(item => {
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+      renderProducts();
+    }
+
+    function addToCart(id) {
+      const product = productsData.find(item => item.id === id);
+      const existing = cart.find(item => item.id === id);
+
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+
+      updateCart();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCart();
+    }
+
+    function updateCart() {
+      const items = document.getElementById("cart-items");
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      document.getElementById("cart-count").textContent = count;
+      document.getElementById("cart-total").textContent = "Q" + total;
+      document.getElementById("checkout-button").disabled = cart.length === 0;
+
+      if (cart.length === 0) {
+        items.innerHTML = '<p style="font-size:12px;color:#777;">Your bag is empty.</p>';
+        document.getElementById("checkout-form").classList.remove("show");
+        return;
+      }
+
+      items.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div>
+            <strong>${item.name}</strong>
+            <small>${item.description}</small>
+            <small>Quantity: ${item.quantity}</small>
+            <button class="remove" onclick="removeFromCart(${item.id})">Remove</button>
+          </div>
+          <strong>Q${item.price * item.quantity}</strong>
+        </div>
+      `).join("");
+    }
+
+    function toggleCart(open) {
+      document.getElementById("cart-panel").classList.toggle("open", open);
+    }
+
+    function outsideCart(event) {
+      if (event.target.id === "cart-panel") {
+        toggleCart(false);
+      }
+    }
+
+    function showCheckout() {
+      document.getElementById("checkout-form").classList.add("show");
+    }
+
+    function sendOrder(event) {
+      event.preventDefault();
+
+      if (cart.length === 0) return;
+
+      const name = document.getElementById("customer-name").value.trim();
+      const phone = document.getElementById("customer-phone").value.trim();
+      const address = document.getElementById("customer-address").value.trim();
+
+      const total = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+
+      let message = "VANTLACK - NEW ORDER\n\n";
+      message += "Customer: " + name + "\n";
+      message += "Phone: " + phone + "\n";
+      message += "Address: " + address + "\n\n";
+      message += "PRODUCTS:\n";
+
+      cart.forEach(item => {
+        message +=
+          "- " + item.name +
+          " (" + item.description + ")" +
+          " x" + item.quantity +
+          " = Q" + (item.price * item.quantity) + "\n";
+      });
+
+      message += "\nTOTAL: Q" + total;
+
+      const whatsappNumber = "50259156249";
+      const url = "https://wa.me/" + whatsappNumber +
+        "?text=" + encodeURIComponent(message);
+
+      window.open(url, "_blank");
+    }
+
+    renderProducts();
+    updateCart();
+  </script>
+
+</body>
+</html>
