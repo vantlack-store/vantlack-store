@@ -31,11 +31,17 @@ header {
   border-bottom: 1px solid var(--line);
 }
 .logo {
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
 }
-.logo span { color: #888; }
+
+.logo img {
+  width: 155px;
+  height: 55px;
+  object-fit: contain;
+  filter: invert(1);
+  mix-blend-mode: screen;
+}
 nav { display: flex; gap: 30px; font-size: 12px; letter-spacing: 1px; }
 nav a:hover { color: #aaa; }
 .hero {
@@ -200,7 +206,9 @@ footer {
 <body>
 
 <header>
-  <a class="logo" href="#">VANTL<span>4</span>CK®</a>
+  <a class="logo" href="#">
+  <img src="logo-vantlack.jpeg" alt="VANTLACK">
+</a>
   <nav>
     <a href="#inicio">INICIO</a>
     <a href="#coleccion">COLECCIÓN</a>
